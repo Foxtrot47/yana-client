@@ -1,11 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import { store } from "../store/index";
+import Login from "../components/Auth/Login.vue";
+import Register from "../components/Auth/Register.vue";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "Home",
     component: Home
+  },
+  { path: "/login", name: "Login", component: Login },
+  { path: "/register", name: "Register", component: Register },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    beforeEnter(to, from, next) {
+      if (store.state.accessToken) {
+        next();
+      } else {
+        next("/login");
+      }
+    }
   },
   {
     path: "/about",
@@ -22,5 +38,4 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
-
 export default router;
