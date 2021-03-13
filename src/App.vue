@@ -1,6 +1,8 @@
 <template>
-  <navbar />
-  <router-view />
+  <div>
+    <navbar />
+    <router-view />
+  </div>
 </template>
 
 <style lang="scss"></style>
@@ -12,10 +14,11 @@ export default {
   components: {
     navbar: Navbar
   },
-  methods: {
-    created() {
-      this.$store.dispatch("AutoLogin");
-    }
+  created() {
+    this.$store.dispatch("AutoLogin");
+  },
+  updated() {
+    console.log("fsf");
   }
 };
 </script>
